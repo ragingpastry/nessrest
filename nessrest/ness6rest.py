@@ -116,7 +116,7 @@ class Scanner(object):
                             method="DELETE", retry=False)
 
         self._get_permissions()
-        self._get_scanner_id()
+        #self._get_scanner_id()
 
 ################################################################################
     def _login(self, login="", password=""):
@@ -701,6 +701,18 @@ class Scanner(object):
                     return True
 
         return False
+
+################################################################################
+    def scan_delete(self, name):
+        '''
+        Delete existing scan
+        '''
+        if (self.scan_exists(name)):
+            self.action(action="scans/" + str(self.scan_id), method="DELETE")
+
+            print("Scan %s deleted" % self.scan_name)
+        else:
+            print("Scan %s does not exist" % self.scan_name)
 
 ################################################################################
     def scan_update_targets(self, targets):
